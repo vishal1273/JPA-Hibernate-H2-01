@@ -1,0 +1,107 @@
+🚀 Connecting Spring Boot to H2 Database (Simple Explanation)
+1️⃣ What is H2?
+
+H2 is an in-memory database
+
+Data exists only while the application is running
+
+2️⃣ How to connect to H2 Database?
+
+When your Spring Boot app starts:
+
+It prints an H2 URL in the console logs
+
+The URL looks like:
+
+jdbc:h2:mem:xxxx
+
+3️⃣ Enable H2 Console
+
+Add this in application.properties:
+
+spring.h2.console.enabled=true
+
+
+✔ Restart the application
+✔ Open browser and go to:
+
+http://localhost:8080/h2-console
+
+4️⃣ Problem: Dynamic H2 URL
+
+By default, H2 generates a random URL
+
+Every restart → URL changes
+
+This makes login difficult
+
+5️⃣ Solution: Configure Static H2 URL
+
+Add this to application.properties:
+
+spring.datasource.url=jdbc:h2:mem:testdb
+
+
+✔ Restart the application
+✔ In H2 Console, enter:
+
+JDBC URL: jdbc:h2:mem:testdb
+
+
+✔ Click Connect
+
+6️⃣ Creating Tables in H2
+
+Spring Boot automatically runs schema.sql
+
+📁 Location:
+
+src/main/resources/schema.sql
+
+
+📄 Example schema.sql:
+
+CREATE TABLE course (
+    id BIGINT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+✔ Restart application
+✔ Table is created automatically
+
+7️⃣ Verify Table in H2 Console
+
+Run this SQL:
+
+SELECT * FROM course;
+
+
+✔ You should see columns:
+
+id
+
+name
+
+author
+
+8️⃣ Important Points to Remember
+
+✅ schema.sql must be in src/main/resources
+✅ Table is created automatically on startup
+✅ H2 data is lost when app stops
+✅ Static URL avoids reconnect issues
+
+🎯 Summary
+
+H2 is an in-memory DB
+
+Enable console using property
+
+Set static URL for easy access
+
+Use schema.sql to create tables
+
+Spring Boot handles everything automatically
