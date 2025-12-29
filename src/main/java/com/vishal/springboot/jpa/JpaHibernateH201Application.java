@@ -8,6 +8,7 @@ public class JpaHibernateH201Application {
 
     public static void main(String[] args) {
         SpringApplication.run(JpaHibernateH201Application.class, args);
+
     }
 
 }
